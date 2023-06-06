@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "474143819523",
+    "project_id": "a-live-ea469",
+    "storage_bucket": "a-live-ea469.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:474143819523:android:fa558957bdb28ae67c8b36",
+        "android_client_info": {
+          "package_name": "com.example.alive_project_master"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "474143819523-pprtuqtlv5slliniiakbqej6a5kqkiqo.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyAjcYc9bja8b7PqLbentYbRqO1z57XEaEo"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "474143819523-pprtuqtlv5slliniiakbqej6a5kqkiqo.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}
