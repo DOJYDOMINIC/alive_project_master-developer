@@ -1,5 +1,6 @@
 
 
+import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:alive_project_master/view/add_data/personal_data.dart';
 import 'package:alive_project_master/view/widgets/elevate_click_button.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
@@ -8,6 +9,7 @@ import 'package:provider/provider.dart';
 
 import '../../control/text_controller.dart';
 import '../widgets/input_field.dart';
+import 'crpdreport.dart';
 
 class Livelihood extends StatefulWidget {
   const Livelihood({Key? key, required String parentid}) : super(key: key);
@@ -51,6 +53,7 @@ class _SalesState extends State<Livelihood> {
   Widget build(BuildContext context) {
     var providerone = Provider.of<TextMain>(context, listen: false);
     return Scaffold(
+      appBar: AppBar(backgroundColor: app_thea_color),
       body: Column(
         children: [
           // Text(DocumentId),
@@ -61,6 +64,7 @@ class _SalesState extends State<Livelihood> {
           ElevateClick(
               ontap: (){
                 Livelihoodmain();
+                Navigator.push(context, MaterialPageRoute(builder: (context) => CrpDetail(parentid: DocumentId,),));
               }, text:'Next'),
         ],
       ),

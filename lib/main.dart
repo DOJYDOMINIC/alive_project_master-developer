@@ -1,6 +1,8 @@
 import 'package:alive_project_master/control/dropdown_provider.dart';
 import 'package:alive_project_master/view/add_data/personal_data.dart';
+import 'package:alive_project_master/view/intro_page/home_Page.dart';
 import 'package:alive_project_master/view/intro_page/splash_screen.dart';
+import 'package:alive_project_master/view/intro_page/test.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -23,9 +25,9 @@ class MyApp extends StatelessWidget {
         ChangeNotifierProvider(
           create: (context) => ModelProvider(),
         ),
-        ChangeNotifierProvider(
-          create: (context) => PeopleListProvider(),
-        ),
+        // ChangeNotifierProvider(
+        //   create: (context) => PeopleListProvider(),
+        // ),
         ChangeNotifierProvider(
           create: (context) => DropdownProvider(),
         ),
@@ -35,7 +37,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Consumer(builder: (context, value, child) => PersonalData()),
+        home: Consumer(builder: (context, value, child) => Search()),
       ),
     );
   }

@@ -1,4 +1,5 @@
 
+import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:alive_project_master/view/add_data/personal_data.dart';
 import 'package:alive_project_master/view/widgets/elevate_click_button.dart';
 import 'package:alive_project_master/view/widgets/headings_between.dart';
@@ -47,6 +48,7 @@ class _SalesState extends State<Sales> {
   Widget build(BuildContext context) {
     var providerone = Provider.of<TextMain>(context, listen: false);
     return Scaffold(
+      appBar: AppBar(backgroundColor: app_thea_color,),
       body: Column(
         children: [
           // Text(DocumentId),

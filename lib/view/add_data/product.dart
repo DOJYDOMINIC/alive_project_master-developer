@@ -1,3 +1,4 @@
+import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:alive_project_master/view/add_data/personal_data.dart';
 import 'package:alive_project_master/view/add_data/purchaseofrawmaterials.dart';
 import 'package:alive_project_master/view/widgets/elevate_click_button.dart';
@@ -26,14 +27,14 @@ class _ProductState extends State<Product> {
     var providerone = Provider.of<TextMain>(context, listen: false);
 
     final data = {
-      "datafamilydetailsageoffamilymember":
+      "data-familydetailsageoffamilymember":
           providerone.dataFamilydetailsAgeoffamilymember,
-      "datafamilydetailseducation": providerone.dataFamilydetailsEducation,
-      "datafamilydetailsjob": providerone.dataFamilydetailsJob,
-      "datafamilydetailsnameoffailyfmember":
+      "data-familydetailseducation": providerone.dataFamilydetailsEducation,
+      "data-familydetailsjob": providerone.dataFamilydetailsJob,
+      "data-familydetailsnameoffailyfmember":
           providerone.dataFamilydetailsNameoffailyfmember,
-      "datafamilydetailsrelation": providerone.dataFamilydetailsRelation,
-      "datafamilydetailsskill": providerone.dataFamilydetailsSkill,
+      "data-familydetailsrelation": providerone.dataFamilydetailsRelation,
+      "data-familydetailsskill": providerone.dataFamilydetailsSkill,
       "PARENT_KEY": DocumentId,
       'KEY': '${DocumentId}'
     };
@@ -45,6 +46,7 @@ class _ProductState extends State<Product> {
     var providerone = Provider.of<TextMain>(context);
 
     return Scaffold(
+      appBar: AppBar(backgroundColor: app_thea_color,),
         body: Column(mainAxisAlignment: MainAxisAlignment.center, children: [
       InputField(
           hint: 'ഉല്‍പ്പന്നം',
@@ -69,7 +71,7 @@ class _ProductState extends State<Product> {
       ElevateClick(
           ontap: () {
             Product();
-            Navigator.pushReplacement(
+            Navigator.push(
                 context,
                 MaterialPageRoute(
                   builder: (context) =>

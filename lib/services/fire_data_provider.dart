@@ -1,98 +1,60 @@
+import 'package:alive_project_master/control/dropdown_provider.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
-class PeopleListProvider extends ChangeNotifier {
-  List<Map<String, dynamic>> itemDetails = [];
-  DocumentSnapshot? lastVisibleDocument;
+import '../control/text_controller.dart';
+import '../view/intro_page/lists.dart';
+import '../view/widgets/dropdown_container_model.dart';
 
-  Future<void> fetchDataFromFirestore({int limit = 50}) async {
-    try {
-      QuerySnapshot salesSnapshot = await FirebaseFirestore.instance
-          .collection('sales')
-          .limit(limit)
-          .get();
+class Search extends StatelessWidget {
+  const Search({Key? key}) : super(key: key);
 
-      QuerySnapshot familyDetailsSnapshot = await FirebaseFirestore.instance
-          .collection('familyDetails')
-          .limit(limit)
-          .get();
+  @override
+  Widget build(BuildContext context) {
+    var provider = Provider.of<ModelProvider>(context);
+    // Stream<QuerySnapshot<Map<String, dynamic>>> datamain;
+    return Scaffold(
+      body: StreamBuilder<QuerySnapshot>(
+        stream:
 
-      // Extract data from the sales collection
-      List<Map<String, dynamic>> salesData = salesSnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
+        // datamain =
 
-      // Extract data from the familyDetail collection
-      List<Map<String, dynamic>> familyDetailsData = familyDetailsSnapshot.docs
-          .map((doc) => doc.data() as Map<String, dynamic>)
-          .toList();
-
-      // Combine the data from both collections
-      List<Map<String, dynamic>> combinedData = [
-        ...familyDetailsData,
-        ...salesData,
-      ];
-      itemDetails = combinedData;
-      // print(itemDetails);
-      notifyListeners();
-
-      // Save the last visible document for pagination
-      lastVisibleDocument =
-          salesSnapshot.docs.isNotEmpty ? salesSnapshot.docs.last : null;
-
-      List<dynamic> dropdownItems = combinedData.map((data) {
-        return data['data-district'];
-      }).toList();
-    } catch (error) {
-      // Handle any errors that occur during the data retrieval
-      print('Error retrieving data: $error');
-    }
-  }
-
-  Future<void> loadMoreData() async {
-    try {
-      if (lastVisibleDocument != null) {
-        QuerySnapshot salesSnapshot = await FirebaseFirestore.instance
-            .collection('sales')
-            .startAfterDocument(lastVisibleDocument!)
-            .limit(50)
-            .get();
-
-        QuerySnapshot familyDetailsSnapshot = await FirebaseFirestore.instance
-            .collection('familyDetails')
-            .startAfterDocument(lastVisibleDocument!)
-            .limit(50)
-            .get();
-
-        // Extract data from the sales collection
-        List<Map<String, dynamic>> salesData = salesSnapshot.docs
-            .map((doc) => doc.data() as Map<String, dynamic>)
-            .toList();
-
-        // Extract data from the familyDetail collection
-        List<Map<String, dynamic>> familyDetailsData = familyDetailsSnapshot
-            .docs
-            .map((doc) => doc.data() as Map<String, dynamic>)
-            .toList();
-
-        // Combine the data from both collections
-        List<Map<String, dynamic>> combinedData = [
-          ...familyDetailsData,
-          ...salesData,
-        ];
-
-        // Append the new data to the existing itemDetails list
-        itemDetails.addAll(combinedData);
-        // print(itemDetails);
-        notifyListeners();
-
-        // Update the last visible document for subsequent pagination
-        lastVisibleDocument =
-            salesSnapshot.docs.isNotEmpty ? salesSnapshot.docs.last : null;
-      }
-    } catch (error) {
-      // Handle any errors that occur during data retrieval
-      print('Error loading more data: $error');
-    }
+            FirebaseFirestore.instance
+            .collection("dummmydata")
+            .where("data-district", isEqualTo: 'Alappuzha')
+            .where("data-Block", isEqualTo: 'Aryad')
+            .where("data-panchayath", isEqualTo: "marari")
+            .where("data-nameofcrp", isEqualTo: "anju")
+            .limit(100)
+            .snapshots(),
+        builder: (BuildContext context, AsyncSnapshot<QuerySnapshot> snapshot) {
+          if (snapshot.connectionState == ConnectionState.waiting) {
+            return Center(child: CircularProgressIndicator());
+          } else if (snapshot.hasError) {
+            return Text('Error: ${snapshot.error}');
+          } else if (snapshot.hasData && snapshot.data!.docs.isNotEmpty) {
+            final data = snapshot.data!.docs.first.data() as Map<String, dynamic>;
+            final dataNameOfCrp = data['data-nameofcrp'] as String;
+            return SafeArea(
+              child: Column(
+                children: [
+                  DropdownContainerModel(
+                    items: districts,
+                    onChanged: (value) {
+                      provider.updatejilla(value);
+                    },
+                    hint: 'ജില്ല',
+                  ),
+                  Center(child: Text(dataNameOfCrp)),
+                ],
+              ),
+            );
+          } else {
+            return Text('No data available.');
+          }
+        },
+      ),
+    );
   }
 }

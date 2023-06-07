@@ -5,6 +5,7 @@ import 'package:alive_project_master/view/widgets/headings_between.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../constant/textdecor.dart';
 import '../../control/text_controller.dart';
 import '../widgets/input_field.dart';
 
@@ -13,6 +14,7 @@ class Purchaseofrawmaterials extends StatefulWidget {
       : super(key: key);
 
   @override
+
   State<Purchaseofrawmaterials> createState() => _PurchaseofrawmaterialsState();
 }
 
@@ -83,6 +85,9 @@ class _PurchaseofrawmaterialsState extends State<Purchaseofrawmaterials> {
     var providerone = Provider.of<TextMain>(context, listen: false);
 
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: app_thea_color,
+      ),
       body: SingleChildScrollView(
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
@@ -117,7 +122,7 @@ class _PurchaseofrawmaterialsState extends State<Purchaseofrawmaterials> {
             ElevateClick(
                 ontap: () {
                   Purchase();
-                  Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Sales(parentid : DocumentId),));
+                  Navigator.push(context, MaterialPageRoute(builder: (context) => Sales(parentid : DocumentId),));
                 },
                 text: 'Next')
           ],

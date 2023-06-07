@@ -1,6 +1,5 @@
 import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:flutter/material.dart';
-
 import '../add_data/personal_data.dart';
 
 

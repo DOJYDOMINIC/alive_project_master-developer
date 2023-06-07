@@ -7,6 +7,7 @@ import 'package:alive_project_master/view/widgets/input_field.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
+import '../../constant/textdecor.dart';
 import '../../control/text_controller.dart';
 
 class FamilyData extends StatefulWidget {
@@ -50,6 +51,9 @@ TextEditingController dataFamilydetailsJob = TextEditingController();
   Widget build(BuildContext context) {
     var providerone = Provider.of<TextMain>(context);
     return Scaffold(
+      appBar: AppBar(
+        backgroundColor: app_thea_color,
+      ),
       body: Column(
         mainAxisAlignment: MainAxisAlignment.center,
         children: [
@@ -62,7 +66,7 @@ TextEditingController dataFamilydetailsJob = TextEditingController();
           InputField(hint: 'പ്രത്യേക കഴിവ്', controller: dataFamilydetailsSkill, onchanged: (value){providerone.updateDataFamilydetailsSkill(value);}),
           ElevateClick(ontap: (){
             Familydta();
-            Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => Product(parentid : DocumentId),));
+            Navigator.push(context, MaterialPageRoute(builder: (context) => Product(parentid : DocumentId),));
           }, text:'Next')
         ],
       ),

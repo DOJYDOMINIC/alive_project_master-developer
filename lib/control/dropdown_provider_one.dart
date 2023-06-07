@@ -1,11 +1,12 @@
-import 'package:flutter/cupertino.dart';
+import 'package:flutter/material.dart';
+import 'package:provider/provider.dart';
 
 class DropdownProvider extends ChangeNotifier {
-  String selectedDistrict = 'District 1';
-  String selectedBlock = 'Block 1';
-  String selectedPanchayat = 'Panchayat 1';
-  String selectedCRP = 'CRP 1';
-  String selectedCategory = 'Category 1';
+  String? selectedDistrict;
+  String? selectedBlock;
+  String? selectedPanchayat;
+  String? selectedCRP;
+  String? selectedCategory;
 
   Map<String, List<String>> districtOptions = {
     'District 1': ['Block 1', 'Block 2', 'Block 3'],
@@ -31,29 +32,53 @@ class DropdownProvider extends ChangeNotifier {
     'CRP 3': ['Category 7', 'Category 8', 'Category 9'],
   };
 
-  get categoryOptions => null;
+  Map<String, List<String>> categoryOptions = {
+    'Category 1': [],
+    'Category 2': [],
+    'Category 3': [],
+    'Category 4': [],
+    'Category 5': [],
+    'Category 6': [],
+    'Category 7': [],
+    'Category 8': [],
+    'Category 9': [],
+  };
+
+  DropdownProvider() {
+    selectedDistrict = districtOptions.keys.first;
+    selectedBlock = districtOptions[selectedDistrict!]!.first;
+    selectedPanchayat = blockOptions[selectedBlock!]!.first;
+    selectedCRP = panchayatOptions[selectedPanchayat!]!.first;
+    selectedCategory = crpOptions[selectedCRP!]!.first;
+  }
 
   void updateSelectedDistrict(String district) {
     selectedDistrict = district;
-    selectedBlock = districtOptions[selectedDistrict]![0];
+    selectedBlock = blockOptions[selectedDistrict!]!.first;
+    selectedPanchayat = panchayatOptions[selectedBlock!]!.first;
+    selectedCRP = crpOptions[selectedPanchayat!]!.first;
+    selectedCategory = categoryOptions[selectedCRP!]!.first;
     notifyListeners();
   }
 
   void updateSelectedBlock(String block) {
     selectedBlock = block;
-    selectedPanchayat = blockOptions[selectedBlock]![0];
+    selectedPanchayat = panchayatOptions[selectedBlock!]!.first;
+    selectedCRP = crpOptions[selectedPanchayat!]!.first;
+    selectedCategory = categoryOptions[selectedCRP!]!.first;
     notifyListeners();
   }
 
   void updateSelectedPanchayat(String panchayat) {
     selectedPanchayat = panchayat;
-    selectedCRP = panchayatOptions[selectedPanchayat]![0];
+    selectedCRP = crpOptions[selectedPanchayat!]!.first;
+    selectedCategory = categoryOptions[selectedCRP!]!.first;
     notifyListeners();
   }
 
   void updateSelectedCRP(String crp) {
     selectedCRP = crp;
-    selectedCategory = crpOptions[selectedCRP]![0];
+    selectedCategory = categoryOptions[selectedCRP!]!.first;
     notifyListeners();
   }
 
