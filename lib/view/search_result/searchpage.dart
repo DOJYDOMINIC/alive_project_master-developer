@@ -29,8 +29,6 @@ class _SearchIndividualPageState extends State<SearchPage> {
       var query = FirebaseFirestore.instance.collection('data')
           .where('data-district', isEqualTo: district);
 
-
-
       if (selectedBlock.isNotEmpty) {
         query = query.where('data-Block', isEqualTo: selectedBlock);
       }
