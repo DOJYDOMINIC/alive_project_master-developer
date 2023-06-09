@@ -3,6 +3,7 @@ import 'package:alive_project_master/view/add_data/personal_data.dart';
 import 'package:alive_project_master/view/intro_page/home_Page.dart';
 import 'package:alive_project_master/view/intro_page/splash_screen.dart';
 import 'package:alive_project_master/view/intro_page/test.dart';
+import 'package:alive_project_master/view/search_result/searchpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -37,7 +38,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Consumer(builder: (context, value, child) => Search()),
+        home: Consumer(builder: (context, value, child) => SearchPage()),
       ),
     );
   }

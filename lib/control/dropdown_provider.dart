@@ -69,66 +69,66 @@ class ModelProvider extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateZilla(String? value) {
-    _zilla = value;
-    notifyListeners();
-  }
-
-  void updateWard(String? value) {
-    _ward = value;
-    notifyListeners();
-  }
-
-  void updateBlock(String? value) {
-    _block = value;
-    notifyListeners();
-  }
-
-  void updatePanchayath(String? value) {
-    _panchayath = value;
-    notifyListeners();
-  }
-
-  void updatekudumbavasta(String? value) {
-    _kudumbavasta = value;
-    notifyListeners();
-  }
-  void updatevibhakam(String? value) {
-    _vibhakam = value;
-    notifyListeners();
-  }
-
-  void updateprethekavibhakam(String? value) {
-    _prethekavibhakam = value;
-    notifyListeners();
-  }
-  void updatemasavaumanam(String? value) {
-    _masavaumanam = value;
-    notifyListeners();
-  }
-  void updatepadavi(String? value) {
-    _padavi = value;
-    notifyListeners();
-  }
-  void updatebusiness(String? value) {
-    _business = value;
-    notifyListeners();
-  }
-  void updatecdsregister(String? value) {
-    _cdsregister = value;
-    notifyListeners();
-  }
-  void updatesambrambamtaram(String? value) {
-    _sambrambamtaram = value;
-    notifyListeners();
-  }
-  void updatemudakkumudal(String? value) {
-    _mudakkumudal = value;
-    notifyListeners();
-  }
-  void updateloan(String? value) {
-    _loan = value;
-    notifyListeners();
-  }
+  // void updateZilla(String? value) {
+  //   _zilla = value;
+  //   notifyListeners();
+  // }
+  //
+  // void updateWard(String? value) {
+  //   _ward = value;
+  //   notifyListeners();
+  // }
+  //
+  // void updateBlock(String? value) {
+  //   _block = value;
+  //   notifyListeners();
+  // }
+  //
+  // void updatePanchayath(String? value) {
+  //   _panchayath = value;
+  //   notifyListeners();
+  // }
+  //
+  // void updatekudumbavasta(String? value) {
+  //   _kudumbavasta = value;
+  //   notifyListeners();
+  // }
+  // void updatevibhakam(String? value) {
+  //   _vibhakam = value;
+  //   notifyListeners();
+  // }
+  //
+  // void updateprethekavibhakam(String? value) {
+  //   _prethekavibhakam = value;
+  //   notifyListeners();
+  // }
+  // void updatemasavaumanam(String? value) {
+  //   _masavaumanam = value;
+  //   notifyListeners();
+  // }
+  // void updatepadavi(String? value) {
+  //   _padavi = value;
+  //   notifyListeners();
+  // }
+  // void updatebusiness(String? value) {
+  //   _business = value;
+  //   notifyListeners();
+  // }
+  // void updatecdsregister(String? value) {
+  //   _cdsregister = value;
+  //   notifyListeners();
+  // }
+  // void updatesambrambamtaram(String? value) {
+  //   _sambrambamtaram = value;
+  //   notifyListeners();
+  // }
+  // void updatemudakkumudal(String? value) {
+  //   _mudakkumudal = value;
+  //   notifyListeners();
+  // }
+  // void updateloan(String? value) {
+  //   _loan = value;
+  //   notifyListeners();
+  // }
 
 }

@@ -49,6 +49,7 @@ dependencies:
   multiselect_formfield: ^0.1.7
   intl: ^0.18.1
   dropdown_search: ^5.0.6
+  flutter_typeahead: ^4.6.1
 
 
 dev_dependencies:

@@ -400,6 +400,7 @@ class _PersonalDataState extends State<PersonalData> {
                     onChanged: (value) {
                       if (value ?? false) {
                         providerone.updateSelectedOption(CheckboxOption.applied,);
+                        providerone.updateDataLoan('applied');
                       }
                     },
                   ),
@@ -409,6 +410,8 @@ class _PersonalDataState extends State<PersonalData> {
                     onChanged: (value) {
                       if (value ?? false) {
                         providerone.updateSelectedOption(CheckboxOption.sanctioned);
+                        providerone.updateDataLoan('sanctioned');
+
                       }
                     },
                   ),
@@ -418,6 +421,7 @@ class _PersonalDataState extends State<PersonalData> {
                     onChanged: (value) {
                       if (value ?? false) {
                         providerone.updateSelectedOption(CheckboxOption.notApplied);
+                        providerone.updateDataLoan('notApplied');
                       }
                     },
                   ),
