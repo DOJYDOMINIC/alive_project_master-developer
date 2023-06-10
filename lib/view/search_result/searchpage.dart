@@ -7,9 +7,17 @@ import 'package:textfield_search/textfield_search.dart';
 class SearchPage extends StatefulWidget {
   @override
   _SearchIndividualPageState createState() => _SearchIndividualPageState();
+
 }
 
 class _SearchIndividualPageState extends State<SearchPage> {
+
+  @override
+  void initState() {
+    super.initState();
+    _districtController.addListener(searchIndividuals);
+  }
+
   TextEditingController _districtController = TextEditingController();
   TextEditingController _blockController = TextEditingController();
   TextEditingController _panchayathController = TextEditingController();
@@ -20,14 +28,16 @@ class _SearchIndividualPageState extends State<SearchPage> {
   String selectedNameOfCrp = '';
 
   List<DocumentSnapshot> searchResults = [];
+  List<DocumentSnapshot> filteredResults = [];
+
 
   void searchIndividuals() async {
     try {
       String district = _districtController.text;
-      String selectedBlock = _blockController.text;
 
       var query = FirebaseFirestore.instance.collection('data')
-          .where('data-district', isEqualTo: district);
+          .where('data-district', isEqualTo: district)
+          .limit(200);
 
       if (selectedBlock.isNotEmpty) {
         query = query.where('data-Block', isEqualTo: selectedBlock);
@@ -47,11 +57,24 @@ class _SearchIndividualPageState extends State<SearchPage> {
 
       setState(() {
         searchResults = snapshot.docs;
+        filteredResults = searchResults; // Initialize filteredResults with all searchResults
       });
     } catch (error) {
       print('An error occurred during the search: $error');
       // Handle the error as per your requirement
     }
+  }
+
+  List<String> getBlockList() {
+    List<String> blockList = [];
+    for (var snapshot in searchResults) {
+      var result = snapshot.data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
+      String block = result?['data-Block'];
+      if (!blockList.contains(block)) {
+        blockList.add(block);
+      }
+    }
+    return blockList;
   }
 
   List<String> getPanchayathList() {
@@ -78,6 +101,18 @@ class _SearchIndividualPageState extends State<SearchPage> {
     return nameOfCrpList;
   }
 
+  void applyFilters() {
+    filteredResults = searchResults;
+
+    // Apply CRP filter if selectedNameOfCrp is not empty
+    if (selectedNameOfCrp.isNotEmpty) {
+      filteredResults = filteredResults.where((snapshot) {
+        var result = snapshot.data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
+        String nameOfCrp = result?['data-nameofcrp'];
+        return nameOfCrp.contains(selectedNameOfCrp);
+      }).toList();
+    }
+  }
 
   void openIndividualPage(String id) {
     Navigator.push(
@@ -87,6 +122,8 @@ class _SearchIndividualPageState extends State<SearchPage> {
       ),
     );
   }
+
+  String selectedCrp = '';
 
   @override
   Widget build(BuildContext context) {
@@ -108,7 +145,7 @@ class _SearchIndividualPageState extends State<SearchPage> {
             ),
             TextFieldSearch(
               controller: _blockController,
-              initialList: block,
+              initialList: getBlockList(),
               decoration: InputDecoration(labelText: 'Block'),
               label: '',
             ),
@@ -126,34 +163,42 @@ class _SearchIndividualPageState extends State<SearchPage> {
                 decoration: InputDecoration(labelText: 'Name of CRP'),
                 label: '',
               ),
-            SizedBox(height: 16),
-            ElevatedButton(
-              onPressed: () {
-                searchIndividuals();
-                print(searchResults);
-              },
-              child: Text('Search'),
-            ),
-            SizedBox(height: 16),
-            if(getNameOfCrpList().isNotEmpty)
-            Expanded(
-              child: ListView.builder(
-                itemCount: searchResults.length,
-                itemBuilder: (context, index) {
-                  var result = searchResults[index].data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
-                  var documentId = searchResults[index].id;
-                  return InkWell(
-                    onTap: () {
-                      openIndividualPage(documentId);
-                    },
-                    child: ListTile(
-                      title: Text(result?['data-Panchayath'] ?? ''),
-                      subtitle: Text(result?['data-nameofcrp'] ?? ''),
-                    ),
-                  );
+            // ElevatedButton(
+            //   onPressed: () {
+            //     searchIndividuals();
+            //     print(searchResults);
+            //   },
+            //   child: Text('Search'),
+            // ),
+            if (getNameOfCrpList().isNotEmpty)
+              ElevatedButton(
+                onPressed: () {
+                  setState(() {
+                    selectedNameOfCrp = _nameofcrpController.text;
+                    applyFilters();
+                  });
                 },
+                child: Text('Apply Filters'),
               ),
-            ),
+            if (selectedNameOfCrp.isNotEmpty)
+              Expanded(
+                child: ListView.builder(
+                  itemCount: filteredResults.length,
+                  itemBuilder: (context, index) {
+                    var result = filteredResults[index].data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
+                    var documentId = filteredResults[index].id;
+                    return InkWell(
+                      onTap: () {
+                        openIndividualPage(documentId);
+                      },
+                      child: ListTile(
+                        title: Text(result?['data-Name'] ?? ''),
+                        subtitle: Text(result?['data-nameofcrp'] ?? ''),
+                      ),
+                    );
+                  },
+                ),
+              ),
           ],
         ),
       ),
