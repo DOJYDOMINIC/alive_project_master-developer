@@ -196,7 +196,7 @@ class _PersonalDataState extends State<PersonalData> {
               ),
               DropdownContainerModel(onChanged: (value){providerone.updateDataPanchayath(value);}, items: panchayth, hint: 'പഞ്ചായത്ത്'),
               InputField(hint: 'വാർഡ്', controller:dataWard,keytype: TextInputType.number, onchanged: (value) { providerone.updateDataWard(value); },),
-              InputField(hint: 'സംരംഭകയുടെ പേര്', controller:dataName,keytype: TextInputType.number, onchanged: (value) { providerone.updateDataName(value); },),
+              InputField(hint: 'സംരംഭകയുടെ പേര്', controller:dataName, onchanged: (value) { providerone.updateDataName(value); },),
               InputField(hint: 'വിലാസം', controller: dataAddress, onchanged: (value){providerone.updateDataAddress(value);}),
               InputField(hint: 'ഫോൺ നമ്പർ', controller: dataPhonenumber, onchanged: (value){providerone.updateDataPhonenumber(value);},keytype: TextInputType.number),
               NoSearchDropdown(onChanged:(value){providerone.updateDataClass(value);} , items:dataclass, hint: 'കുടുംബ അവസ്ഥ'),
@@ -468,6 +468,7 @@ class _PersonalDataState extends State<PersonalData> {
                ),
               ),
               InputField(hint: 'ആവശ്യമായ പിൻതുണ/സഹായം ', controller: dataSupport, onchanged: (value){}),
+
               ElevateClick(ontap: (){
                 addDataOne();
                 Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyData(parentid:DocumentId),));

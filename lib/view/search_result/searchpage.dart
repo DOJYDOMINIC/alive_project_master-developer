@@ -1,3 +1,4 @@
+import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:alive_project_master/view/intro_page/lists.dart';
 import 'package:alive_project_master/view/search_result/resultpage.dart';
 import 'package:flutter/material.dart';
@@ -18,6 +19,13 @@ class _SearchIndividualPageState extends State<SearchPage> {
     _districtController.addListener(searchIndividuals);
   }
 
+  @override
+  void dispose() {
+    _districtController.removeListener(searchIndividuals);
+    _districtController.dispose();
+    super.dispose();
+  }
+
   TextEditingController _districtController = TextEditingController();
   TextEditingController _blockController = TextEditingController();
   TextEditingController _panchayathController = TextEditingController();
@@ -29,15 +37,26 @@ class _SearchIndividualPageState extends State<SearchPage> {
 
   List<DocumentSnapshot> searchResults = [];
   List<DocumentSnapshot> filteredResults = [];
+  List<DocumentSnapshot> panchayathlist = [];
+
+
+
 
 
   void searchIndividuals() async {
     try {
       String district = _districtController.text;
+      String selectedBlock = _blockController.text;
+      String selectedPanchayath = _panchayathController.text;
+      String  selectedNameOfCrp = _nameofcrpController.text;
+
 
       var query = FirebaseFirestore.instance.collection('data')
-          .where('data-district', isEqualTo: district)
-          .limit(200);
+          .where('data-district', isEqualTo: district);
+          // .where('data-Block', isEqualTo: selectedBlock)
+          // .where('data-Panchayath', isEqualTo: selectedPanchayath)
+          // .where('data-nameofcrp', isEqualTo: selectedNameOfCrp);
+          // .limit(200);
 
       if (selectedBlock.isNotEmpty) {
         query = query.where('data-Block', isEqualTo: selectedBlock);
@@ -65,6 +84,7 @@ class _SearchIndividualPageState extends State<SearchPage> {
     }
   }
 
+
   List<String> getBlockList() {
     List<String> blockList = [];
     for (var snapshot in searchResults) {
@@ -72,22 +92,36 @@ class _SearchIndividualPageState extends State<SearchPage> {
       String block = result?['data-Block'];
       if (!blockList.contains(block)) {
         blockList.add(block);
+        print('block = ${block}');
       }
     }
     return blockList;
   }
 
+
   List<String> getPanchayathList() {
     List<String> panchayathList = [];
+
     for (var snapshot in searchResults) {
-      var result = snapshot.data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
+      var result = snapshot.data() as Map<String, dynamic>?;
+      String block = result?['data-Block'];
       String panchayath = result?['data-Panchayath'];
-      if (!panchayathList.contains(panchayath)) {
+
+      // Check if the block matches the selected block
+      if (!panchayathlist.contains(selectedBlock)) {
         panchayathList.add(panchayath);
+        print(selectedBlock);
+        print(_districtController);
+        print(_blockController);
+        print(_nameofcrpController);
+
       }
     }
+
     return panchayathList;
   }
+
+
 
   List<String> getNameOfCrpList() {
     List<String> nameOfCrpList = [];
@@ -103,7 +137,6 @@ class _SearchIndividualPageState extends State<SearchPage> {
 
   void applyFilters() {
     filteredResults = searchResults;
-
     // Apply CRP filter if selectedNameOfCrp is not empty
     if (selectedNameOfCrp.isNotEmpty) {
       filteredResults = filteredResults.where((snapshot) {
@@ -114,14 +147,15 @@ class _SearchIndividualPageState extends State<SearchPage> {
     }
   }
 
-  void openIndividualPage(String id) {
+  void openIndividualPage(String id, Map<String, dynamic>? result) {
     Navigator.push(
       context,
       MaterialPageRoute(
-        builder: (context) => IndividualPage(itemId: id),
+        builder: (context) => IndividualPage(itemId:id,details: result),
       ),
     );
   }
+
 
   String selectedCrp = '';
 
@@ -129,6 +163,7 @@ class _SearchIndividualPageState extends State<SearchPage> {
   Widget build(BuildContext context) {
     return Scaffold(
       appBar: AppBar(
+        backgroundColor: app_thea_color,
         title: Text('Search Individual'),
       ),
       body: Padding(
@@ -140,8 +175,7 @@ class _SearchIndividualPageState extends State<SearchPage> {
             TextFieldSearch(
               controller: _districtController,
               initialList: districts,
-              decoration: InputDecoration(labelText: 'District'),
-              label: '',
+              decoration: InputDecoration(labelText: 'District'), label: '',
             ),
             TextFieldSearch(
               controller: _blockController,
@@ -149,27 +183,18 @@ class _SearchIndividualPageState extends State<SearchPage> {
               decoration: InputDecoration(labelText: 'Block'),
               label: '',
             ),
-            if (searchResults.isNotEmpty)
               TextFieldSearch(
                 controller: _panchayathController,
                 initialList: getPanchayathList(),
                 decoration: InputDecoration(labelText: 'Panchayath'),
                 label: '',
               ),
-            if (searchResults.isNotEmpty)
               TextFieldSearch(
                 controller: _nameofcrpController,
                 initialList: getNameOfCrpList(),
                 decoration: InputDecoration(labelText: 'Name of CRP'),
                 label: '',
               ),
-            // ElevatedButton(
-            //   onPressed: () {
-            //     searchIndividuals();
-            //     print(searchResults);
-            //   },
-            //   child: Text('Search'),
-            // ),
             if (getNameOfCrpList().isNotEmpty)
               ElevatedButton(
                 onPressed: () {
@@ -187,13 +212,20 @@ class _SearchIndividualPageState extends State<SearchPage> {
                   itemBuilder: (context, index) {
                     var result = filteredResults[index].data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
                     var documentId = filteredResults[index].id;
-                    return InkWell(
-                      onTap: () {
-                        openIndividualPage(documentId);
-                      },
-                      child: ListTile(
-                        title: Text(result?['data-Name'] ?? ''),
-                        subtitle: Text(result?['data-nameofcrp'] ?? ''),
+                    return Padding(
+                      padding: const EdgeInsets.only(bottom: 10),
+                      child: Container(
+                        decoration: BoxDecoration(border: Border.all(color: Colors.black)),
+                        child: InkWell(
+                          onTap: () {
+                            openIndividualPage(documentId,result);
+                          },
+                          child: ListTile(
+                            title: Text(result?['data-Panchayath'] ?? ''),
+                            subtitle: Text(result?['data-nameofcrp'] ?? ''),
+                            // trailing: Text(result?['data-'] ?? ''),
+                          ),
+                        ),
                       ),
                     );
                   },

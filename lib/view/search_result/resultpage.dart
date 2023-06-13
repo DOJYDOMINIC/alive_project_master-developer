@@ -1,9 +1,11 @@
 import 'package:flutter/material.dart';
 
 class IndividualPage extends StatelessWidget {
-  final String itemId;
 
-  const IndividualPage({Key? key, required this.itemId}) : super(key: key);
+  final String itemId;
+  final Map<String, dynamic>? details;
+
+  IndividualPage({Key? key, required this.itemId, this.details}) : super(key: key);
 
   @override
   Widget build(BuildContext context) {
@@ -11,8 +13,17 @@ class IndividualPage extends StatelessWidget {
       appBar: AppBar(
         title: Text('Individual Details'),
       ),
-      body: Center(
-        child: Text('Display individual details for item with ID: $itemId'),
+      body: Padding(
+        padding: const EdgeInsets.all(16.0),
+        child: Column(
+          crossAxisAlignment: CrossAxisAlignment.start,
+          children: [
+            Text('Name: ${details?['data-Name']}'),
+            Text('Address: ${details?['data-Address']}'),
+            Text('Contact: ${details?['data-nameofcrp']}'),
+            Text('Email: ${details?['data-Phonenumber']}'),
+          ],
+        ),
       ),
     );
   }

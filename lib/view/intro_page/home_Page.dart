@@ -1,6 +1,7 @@
 import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:flutter/material.dart';
 import '../add_data/personal_data.dart';
+import '../search_result/searchpage.dart';
 
 
 class HomePage extends StatefulWidget {
@@ -45,7 +46,7 @@ class _HomePageState extends State<HomePage> {
             SizedBox(height: 20,),
             GestureDetector(
               onTap: (){
-                // Navigator.push(context, MaterialPageRoute(builder: (context) => UpdateMain(),));
+                Navigator.push(context, MaterialPageRoute(builder: (context) => SearchPage(),));
               },
               child: Container(
                 decoration: BoxDecoration(
