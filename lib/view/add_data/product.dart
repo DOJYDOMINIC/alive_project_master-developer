@@ -8,6 +8,7 @@ import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 import '../../control/text_controller.dart';
 
+
 class Product extends StatefulWidget {
   const Product({Key? key, required String parentid}) : super(key: key);
 
@@ -36,7 +37,7 @@ class _ProductState extends State<Product> {
       "data-familydetailsrelation": providerone.dataFamilydetailsRelation,
       "data-familydetailsskill": providerone.dataFamilydetailsSkill,
       "PARENT_KEY": DocumentId,
-      'KEY': '${DocumentId}'
+      'KEY': DocumentId,
     };
     datatwo.add(data);
   }

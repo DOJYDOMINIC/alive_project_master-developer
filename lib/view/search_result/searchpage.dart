@@ -1,3 +1,4 @@
+import 'package:alive_project_master/constant/elivated_button.dart';
 import 'package:alive_project_master/constant/textdecor.dart';
 import 'package:alive_project_master/view/intro_page/lists.dart';
 import 'package:alive_project_master/view/search_result/resultpage.dart';
@@ -14,11 +15,23 @@ class SearchPage extends StatefulWidget {
 class _SearchIndividualPageState extends State<SearchPage> {
 
   @override
+  @override
   void initState() {
     super.initState();
     _districtController.addListener(searchIndividuals);
+    _blockController.addListener(() {
+      setState(() {
+        selectedBlock = _blockController.text;
+        _panchayathController.text = ''; // Reset the Panchayath field when the Block changes
+      });
+    });
+    _panchayathController.addListener(() {
+      setState(() {
+        selectedPanchayath = _panchayathController.text;
+        _nameofcrpController.text='';
+      });
+    });
   }
-
   @override
   void dispose() {
     _districtController.removeListener(searchIndividuals);
@@ -41,8 +54,6 @@ class _SearchIndividualPageState extends State<SearchPage> {
 
 
 
-
-
   void searchIndividuals() async {
     try {
       String district = _districtController.text;
@@ -55,22 +66,24 @@ class _SearchIndividualPageState extends State<SearchPage> {
           .where('data-district', isEqualTo: district);
           // .where('data-Block', isEqualTo: selectedBlock)
           // .where('data-Panchayath', isEqualTo: selectedPanchayath)
-          // .where('data-nameofcrp', isEqualTo: selectedNameOfCrp);
+          // .where('data-nameofcrp', isEqualTo: selectedNameOfCrp)
           // .limit(200);
 
       if (selectedBlock.isNotEmpty) {
         query = query.where('data-Block', isEqualTo: selectedBlock);
+        print(selectedBlock);
       }
 
       if (selectedPanchayath.isNotEmpty) {
-        query = query.where('data-Panchayath', isEqualTo: selectedPanchayath);
+        query = query..where('data-Block', isEqualTo: selectedBlock);
+
       }
 
       if (selectedNameOfCrp.isNotEmpty) {
         query = query.where('data-nameofcrp', isEqualTo: selectedNameOfCrp);
       }
 
-      query = query.limit(200);
+      query = query.limit(300);
 
       var snapshot = await query.get();
 
@@ -92,12 +105,11 @@ class _SearchIndividualPageState extends State<SearchPage> {
       String block = result?['data-Block'];
       if (!blockList.contains(block)) {
         blockList.add(block);
-        print('block = ${block}');
+        // print('block = ${block}');
       }
     }
     return blockList;
   }
-
 
   List<String> getPanchayathList() {
     List<String> panchayathList = [];
@@ -108,27 +120,20 @@ class _SearchIndividualPageState extends State<SearchPage> {
       String panchayath = result?['data-Panchayath'];
 
       // Check if the block matches the selected block
-      if (!panchayathlist.contains(selectedBlock)) {
+      if (block == selectedBlock && !panchayathList.contains(panchayath)) {
         panchayathList.add(panchayath);
-        print(selectedBlock);
-        print(_districtController);
-        print(_blockController);
-        print(_nameofcrpController);
-
       }
     }
-
     return panchayathList;
   }
-
-
 
   List<String> getNameOfCrpList() {
     List<String> nameOfCrpList = [];
     for (var snapshot in searchResults) {
       var result = snapshot.data() as Map<String, dynamic>?; // Explicit cast to Map<String, dynamic> or nullable
+      String panchayath = result?['data-Panchayath'];
       String nameOfCrp = result?['data-nameofcrp'];
-      if (!nameOfCrpList.contains(nameOfCrp)) {
+      if (panchayath == selectedPanchayath && !nameOfCrpList.contains(nameOfCrp)) {
         nameOfCrpList.add(nameOfCrp);
       }
     }
@@ -156,7 +161,6 @@ class _SearchIndividualPageState extends State<SearchPage> {
     );
   }
 
-
   String selectedCrp = '';
 
   @override
@@ -171,7 +175,6 @@ class _SearchIndividualPageState extends State<SearchPage> {
         child: Column(
           crossAxisAlignment: CrossAxisAlignment.start,
           children: [
-            Text('Search Criteria', style: TextStyle(fontSize: 18)),
             TextFieldSearch(
               controller: _districtController,
               initialList: districts,
@@ -197,6 +200,7 @@ class _SearchIndividualPageState extends State<SearchPage> {
               ),
             if (getNameOfCrpList().isNotEmpty)
               ElevatedButton(
+                style: buttonstyle_main,
                 onPressed: () {
                   setState(() {
                     selectedNameOfCrp = _nameofcrpController.text;
@@ -221,8 +225,9 @@ class _SearchIndividualPageState extends State<SearchPage> {
                             openIndividualPage(documentId,result);
                           },
                           child: ListTile(
-                            title: Text(result?['data-Panchayath'] ?? ''),
+                            title: Text(result?['data-Name'] ?? ''),
                             subtitle: Text(result?['data-nameofcrp'] ?? ''),
+                            leading:Text(result?['data-Ward'].toString() ?? ''),
                             // trailing: Text(result?['data-'] ?? ''),
                           ),
                         ),

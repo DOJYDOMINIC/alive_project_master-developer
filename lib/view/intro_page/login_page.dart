@@ -25,6 +25,7 @@ class _LoginScreenState extends State<LoginScreen> {
         email: email,
         password: password,
       );
+
 Navigator.pushReplacement(context, MaterialPageRoute(builder: (context) => HomePage(),));
       // Login successful, navigate to another screen
       // or perform any other desired actions

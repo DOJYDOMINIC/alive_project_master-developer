@@ -41,7 +41,6 @@ class _PersonalDataState extends State<PersonalData> {
   TextEditingController dataAmountinvested = TextEditingController();
   TextEditingController dataSupportrecived = TextEditingController();
   TextEditingController dataBusinessidea = TextEditingController();
-  // TextEditingController dataSourceofinvestment = TextEditingController();
   TextEditingController dataDistrict = TextEditingController();
   TextEditingController dataBlock = TextEditingController();
   TextEditingController dataPanchayth = TextEditingController();
@@ -52,9 +51,9 @@ class _PersonalDataState extends State<PersonalData> {
   TextEditingController dataFamilyincome = TextEditingController();
   TextEditingController datalanddetailslandarea = TextEditingController();
   TextEditingController dataSupport = TextEditingController();
-  TextEditingController datalanddetailsagricultureland =
-      TextEditingController();
+  TextEditingController datalanddetailsagricultureland = TextEditingController();
   TextEditingController dataInfraOthers = TextEditingController();
+
   List dataclass3 = [];
   List dataAnimalhusbendaryBusinesstype =[];
   List dataSourceofinvestment = [];
@@ -64,6 +63,10 @@ class _PersonalDataState extends State<PersonalData> {
   TextEditingController datePickerController = TextEditingController();
   TextEditingController selectedDateController = TextEditingController();
   // ----------------------------------------------------
+
+
+
+
   onTapFunction({required BuildContext context}) async {
     DateTime? pickedDate = await showDatePicker(
       context: context,
@@ -84,6 +87,7 @@ class _PersonalDataState extends State<PersonalData> {
       firstDate: DateTime(2015),
       initialDate: DateTime.now(),
     );
+
     if (pickedDate == null) return;
     String formattedDate = DateFormat('dd-MM-yyyy').format(pickedDate);
 
@@ -157,7 +161,7 @@ class _PersonalDataState extends State<PersonalData> {
       "data-others3": providerone.dataOthers3,
       "data-comments": providerone.dataComments,
       "data-meta-instanceID": providerone.dataMetaInstanceId,
-      // 'Parentid':DocumentId,
+      "PARENT_KEY" : DocumentId,
       "KEY": DocumentId,
     };
     collectionRef
@@ -174,13 +178,14 @@ class _PersonalDataState extends State<PersonalData> {
     return Scaffold(
       appBar: AppBar(
         backgroundColor: app_thea_color,
+        title: Text('വ്യക്തിഗത വിശദാംശങ്ങൾ'),
       ),
       body: SingleChildScrollView(
         child: Padding(
           padding: const EdgeInsets.all(8.0),
           child: Column(
             children: [
-              DropdownContainerModel(
+              NoSearchDropdown(
                 items: districts,
                 onChanged: (value) {
                   providerone.updateDataDistrict(value);
@@ -229,8 +234,8 @@ class _PersonalDataState extends State<PersonalData> {
               InputField(hint: 'അയൽക്കൂട്ട അംഗത്തിന്റെ പേര്', controller: dataNameofNGmember, onchanged: (value){providerone.updateDataNameofNGmember(value);}),
               NoSearchDropdown(onChanged:(value){providerone.updateDataRoleinNg(value);} , items: position, hint: 'അയൽക്കൂട്ടത്തിലെ പദവി'),
               NoSearchDropdown(onChanged:(value){providerone.updateDataHouseownership(value);}, items: house, hint: 'വീട് '),
-              InputField(hint: 'പുരയിടത്തിൻറെ വിസ്തീർണ്ണം ( സെന്റ്)', controller: datalanddetailslandarea, onchanged: (value){providerone.updateDataLanddetailsLandarea(value);},keytype: TextInputType.number,),
-              InputField(hint: 'ഭൂമി സംബന്ധിച്ച് വിവരങ്ങൾ (നിലം സെൻറിൽ)', controller:datalanddetailsagricultureland , onchanged: (value){providerone.updateDataLanddetailsAgricultureland(value);}),
+              InputField(hint: 'പുരയിടം ( സെന്റ്)', controller: datalanddetailslandarea, onchanged: (value){providerone.updateDataLanddetailsLandarea(value);},keytype: TextInputType.number,),
+              InputField(hint: ' നിലം (സെന്റ്)', controller:datalanddetailsagricultureland , onchanged: (value){providerone.updateDataLanddetailsAgricultureland(value);},keytype: TextInputType.number,),
               Padding(
                 padding: const EdgeInsets.only(top: 10),
                 child: Container(
@@ -451,14 +456,15 @@ class _PersonalDataState extends State<PersonalData> {
             ),
               InputField(hint: 'ബിസ്സിനെസ്സ് ഐഡിയ', controller: dataBusinessidea, onchanged: (value){providerone.updateDataBusinessidea(value);}),
               SizedBox(height: 10,),
-              Container(
-                decoration: BoxDecoration(
-                  borderRadius: BorderRadius.circular(10),
-                  border: Border.all(color: Colors.black),
-                ),
-               child:  Column(
+              Headings(text: 'അടിസ്ഥാന സൗകര്യം'),
+              // Container(
+              //   decoration: BoxDecoration(
+              //     borderRadius: BorderRadius.circular(10),
+              //     border: Border.all(color: Colors.black),
+              //   ),
+              //  child:
+               Column(
                  children: [
-                   Headings(text: 'അടിസ്ഥാന സൗകര്യം'),
                    NoSearchDropdown(onChanged: (value){providerone.updateDataInfraShed(value);}, items:condition, hint: 'ഷെഡ് / കൂട്'),
                    NoSearchDropdown(onChanged: (value){providerone.updateDataInfraWastage(value);}, items:condition, hint: 'വെസ്റ്റേജ്'),
                    NoSearchDropdown(onChanged: (value){providerone.updateDataInfraBiogas(value);}, items:condition, hint: 'ബയോഗ്യാസ്'),
@@ -466,7 +472,7 @@ class _PersonalDataState extends State<PersonalData> {
                    InputField(hint: 'മറ്റുള്ളവ ', controller: dataInfraOthers,onchanged: (value) {providerone.updateDataInfraOthers(value);},),
                  ],
                ),
-              ),
+              // ),
               InputField(hint: 'ആവശ്യമായ പിൻതുണ/സഹായം ', controller: dataSupport, onchanged: (value){}),
 
               ElevateClick(ontap: (){

@@ -16,6 +16,7 @@ class TextMain extends ChangeNotifier {
     _isYesSelected = value;
     notifyListeners();
   }
+
   CheckboxOption _selectedOption = CheckboxOption.notApplied;
   CheckboxOption get selectedOption => _selectedOption;
 
@@ -49,8 +50,8 @@ class TextMain extends ChangeNotifier {
   String? _dataNameofNGmember;
   String? _dataRoleinNg;
   String? _dataHouseownership;
-  int? _dataLanddetailsLandarea;
-  int? _dataLanddetailsAgricultureland;
+  String? _dataLanddetailsLandarea;
+  String? _dataLanddetailsAgricultureland;
   List? _dataAnimalhusbendaryBusinesstype;
   String? _dataAnimalhusbendaryOthers0;
   String? _dataAnimalhusbendaryCdsregistration;
@@ -60,7 +61,7 @@ class TextMain extends ChangeNotifier {
   String? _dataNoofgroupmembers;
   String? _dataYearofstartingagriculture;
   String? _dataYearofstartingbussiness;
-  int? _dataAmountinvested;
+  String? _dataAmountinvested;
   List? _dataSourceofinvestment;
   String? _dataSupportrecived;
   String? _dataLoan;
@@ -113,11 +114,11 @@ class TextMain extends ChangeNotifier {
   String? _dataPurchaseofrawmaterialsBrand;
   String? _dataPurchaseofrawmaterialsOwn;
   String? _dataPurchaseofrawmaterialsRetail;
-  int? _dataPurchaseofrawmaterialsP2;
+  String? _dataPurchaseofrawmaterialsP2;
   String? _dataPurchaseofrawmaterialsWholesale;
-  int? _dataPurchaseofrawmaterialsP3;
+  String? _dataPurchaseofrawmaterialsP3;
   String? _dataPurchaseofrawmaterialsGroup;
-  int? _dataPurchaseofrawmaterialsP4;
+  String? _dataPurchaseofrawmaterialsP4;
   String? _dataPurchaseofrawmaterialsSubsidy;
   String? _dataPurchaseofrawmaterialsP5;
   // -----------------sales----------
@@ -161,9 +162,9 @@ class TextMain extends ChangeNotifier {
 
   String? get dataHouseownership => _dataHouseownership;
 
-  int? get dataLanddetailsLandarea => _dataLanddetailsLandarea;
+  String? get dataLanddetailsLandarea => _dataLanddetailsLandarea;
 
-  int? get dataLanddetailsAgricultureland => _dataLanddetailsAgricultureland;
+  String? get dataLanddetailsAgricultureland => _dataLanddetailsAgricultureland;
 
   List? get dataAnimalhusbendaryBusinesstype =>
       _dataAnimalhusbendaryBusinesstype;
@@ -187,7 +188,7 @@ class TextMain extends ChangeNotifier {
 
   String? get dataYearofstartingbussiness => _dataYearofstartingbussiness;
 
-  int? get dataAmountinvested => _dataAmountinvested;
+  String? get dataAmountinvested => _dataAmountinvested;
 
   List? get dataSourceofinvestment => _dataSourceofinvestment;
 
@@ -289,15 +290,15 @@ class TextMain extends ChangeNotifier {
  get dataPurchaseofrawmaterialsOwn => _dataPurchaseofrawmaterialsOwn;
   String?
  get dataPurchaseofrawmaterialsRetail => _dataPurchaseofrawmaterialsRetail;
-  int?
+  String?
  get dataPurchaseofrawmaterialsP2 => _dataPurchaseofrawmaterialsP2;
   String?
  get dataPurchaseofrawmaterialsWholesale => _dataPurchaseofrawmaterialsWholesale;
-  int?
+  String?
  get dataPurchaseofrawmaterialsP3 => _dataPurchaseofrawmaterialsP3;
   String?
  get dataPurchaseofrawmaterialsGroup => _dataPurchaseofrawmaterialsGroup;
-  int?
+  String?
  get dataPurchaseofrawmaterialsP4 => _dataPurchaseofrawmaterialsP4;
   String?
  get dataPurchaseofrawmaterialsSubsidy => _dataPurchaseofrawmaterialsSubsidy;
@@ -485,13 +486,13 @@ class TextMain extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDataLanddetailsLandarea(int? value) {
+  void updateDataLanddetailsLandarea(String? value) {
     _dataLanddetailsLandarea = value;
     notifyListeners();
   }
 
-  void updateDataLanddetailsAgricultureland(int? value) {
-    _dataLanddetailsAgricultureland = value;
+  void updateDataLanddetailsAgricultureland(String? value) {
+    _dataLanddetailsAgricultureland = value ;
     notifyListeners();
   }
 
@@ -540,7 +541,7 @@ class TextMain extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDataAmountinvested(int? value) {
+  void updateDataAmountinvested(String? value) {
     _dataAmountinvested = value;
     notifyListeners();
   }
@@ -726,7 +727,7 @@ class TextMain extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDataPurchaseofrawmaterialsP2(int? value) {
+  void updateDataPurchaseofrawmaterialsP2(String? value) {
     _dataPurchaseofrawmaterialsP2 = value;
     notifyListeners();
   }
@@ -736,7 +737,7 @@ class TextMain extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDataPurchaseofrawmaterialsP3(int? value) {
+  void updateDataPurchaseofrawmaterialsP3(String? value) {
     _dataPurchaseofrawmaterialsP3 = value;
     notifyListeners();
   }
@@ -746,7 +747,7 @@ class TextMain extends ChangeNotifier {
     notifyListeners();
   }
 
-  void updateDataPurchaseofrawmaterialsP4(int? value) {
+  void updateDataPurchaseofrawmaterialsP4(String? value) {
     _dataPurchaseofrawmaterialsP4 = value;
     notifyListeners();
   }

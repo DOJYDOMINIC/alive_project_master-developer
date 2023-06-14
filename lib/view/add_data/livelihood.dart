@@ -41,7 +41,6 @@ class _SalesState extends State<Livelihood> {
       "datalivelihoodnumbers": providerone.datalivelihoodnumbers,
       "datalivelihoodcapitalsource": providerone.datalivelihoodcapitalsource,
       "datalivelihoodrevenue": providerone.datalivelihoodrevenue,
-
       "KEY": DocumentId,
       "PARENT_KEY": DocumentId,
     };

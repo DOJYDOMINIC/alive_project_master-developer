@@ -22,8 +22,8 @@ class _SalesState extends State<CrpDetail> {
   TextEditingController dataNameofrespondent = TextEditingController();
 
   void Crp() {
-    final CollectionReference datasix =
-        FirebaseFirestore.instance.collection('login');
+
+    final CollectionReference datasix = FirebaseFirestore.instance.collection('login');
 
     var providerone = Provider.of<TextMain>(context, listen: false);
 
@@ -44,7 +44,9 @@ class _SalesState extends State<CrpDetail> {
     var providerone = Provider.of<TextMain>(context, listen: false);
     return Scaffold(
       appBar: AppBar(
+        title: Text('സി.ആർ.പിയുടെ നിർദേശങ്ങൾ'),
         backgroundColor: app_thea_color,
+
       ),
       body: Column(
         children: [

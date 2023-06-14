@@ -8,6 +8,7 @@ class DropdownProvider extends ChangeNotifier {
   String? selectedCRP;
   String? selectedCategory;
 
+
   Map<String, List<String>> districtOptions = {
     'District 1': ['Block 1', 'Block 2', 'Block 3'],
     'District 2': ['Block 4', 'Block 5', 'Block 6'],

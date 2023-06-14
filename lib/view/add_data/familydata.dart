@@ -18,6 +18,7 @@ class FamilyData extends StatefulWidget {
 }
 
 class _FamilyDataState extends State<FamilyData> {
+  TextEditingController dataFamilydetailsNameoffailyfmember = TextEditingController();
 TextEditingController datafamilydetailsageoffamilymember = TextEditingController();
 TextEditingController datafamilydetailsrelation = TextEditingController();
 TextEditingController dataFamilydetailsEducation = TextEditingController();
@@ -41,7 +42,7 @@ TextEditingController dataFamilydetailsJob = TextEditingController();
       "datafamilydetailsrelation":providerone.dataFamilydetailsRelation,
       "datafamilydetailsskill" :providerone.dataFamilydetailsSkill,
       "PARENT_KEY":DocumentId,
-      // 'KEY': '${DocumentId}'
+      'KEY': '${DocumentId}'
 
     };
    dataone.add(data);
@@ -54,21 +55,23 @@ TextEditingController dataFamilydetailsJob = TextEditingController();
       appBar: AppBar(
         backgroundColor: app_thea_color,
       ),
-      body: Column(
-        mainAxisAlignment: MainAxisAlignment.center,
-        children: [
-          // Center(child: Text('$DocumentId')),
-          InputField(hint: 'കുടുംബാംഗത്തിൻ്റെ പേര് ', controller:datafamilydetailsageoffamilymember, onchanged: (value){providerone.updateDataFamilydetailsNameoffailyfmember(value);}),
-          InputField(hint: 'ബന്ധം', controller: datafamilydetailsrelation, onchanged: (value){providerone.updateDataFamilydetailsRelation(value);}),
-          InputField(hint: 'വയസ്സ്‌', controller:datafamilydetailsageoffamilymember, onchanged: (value){providerone.updateDatadataFamilydetailsAgeoffamilymember(value);},keytype: TextInputType.number,),
-          InputField(hint: 'വിദ്യാഭ്യാസം', controller:dataFamilydetailsEducation, onchanged:(value){providerone.updateDataFamilydetailsEducation(value);}),
-          InputField(hint: 'തൊഴില്‍', controller: dataFamilydetailsJob, onchanged: (value){providerone.updateDataFamilydetailsJob(value);}),
-          InputField(hint: 'പ്രത്യേക കഴിവ്', controller: dataFamilydetailsSkill, onchanged: (value){providerone.updateDataFamilydetailsSkill(value);}),
-          ElevateClick(ontap: (){
-            Familydta();
-            Navigator.push(context, MaterialPageRoute(builder: (context) => Product(parentid : DocumentId),));
-          }, text:'Next')
-        ],
+      body: SingleChildScrollView(
+        child: Column(
+          mainAxisAlignment: MainAxisAlignment.center,
+          children: [
+            // Center(child: Text('$DocumentId')),
+            InputField(hint: 'കുടുംബാംഗത്തിൻ്റെ പേര് ', controller:dataFamilydetailsNameoffailyfmember, onchanged: (value){providerone.updateDataFamilydetailsNameoffailyfmember(value);}),
+            InputField(hint: 'ബന്ധം', controller: datafamilydetailsrelation, onchanged: (value){providerone.updateDataFamilydetailsRelation(value);}),
+            InputField(hint: 'വയസ്സ്‌', controller:datafamilydetailsageoffamilymember, onchanged: (value){providerone.updateDatadataFamilydetailsAgeoffamilymember(value);},keytype: TextInputType.number,),
+            InputField(hint: 'വിദ്യാഭ്യാസം', controller:dataFamilydetailsEducation, onchanged:(value){providerone.updateDataFamilydetailsEducation(value);}),
+            InputField(hint: 'തൊഴില്‍', controller: dataFamilydetailsJob, onchanged: (value){providerone.updateDataFamilydetailsJob(value);}),
+            InputField(hint: 'പ്രത്യേക കഴിവ്', controller: dataFamilydetailsSkill, onchanged: (value){providerone.updateDataFamilydetailsSkill(value);}),
+            ElevateClick(ontap: (){
+              Familydta();
+              Navigator.push(context, MaterialPageRoute(builder: (context) => Product(parentid : DocumentId),));
+            }, text:'Next')
+          ],
+        ),
       ),
     );
   }
