@@ -1,5 +1,4 @@
 
-
 import 'package:alive_project_master/view/add_data/personal_data.dart';
 import 'package:alive_project_master/view/add_data/product.dart';
 import 'package:alive_project_master/view/widgets/elevate_click_button.dart';

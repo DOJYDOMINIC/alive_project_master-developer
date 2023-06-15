@@ -1,6 +1,7 @@
 import 'package:alive_project_master/control/dropdown_provider.dart';
 import 'package:alive_project_master/view/intro_page/home_Page.dart';
 import 'package:alive_project_master/view/intro_page/splash_screen.dart';
+import 'package:alive_project_master/view/intro_page/test.dart';
 import 'package:alive_project_master/view/search_result/searchpage.dart';
 import 'package:firebase_core/firebase_core.dart';
 import 'package:flutter/material.dart';
@@ -36,7 +37,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Consumer(builder: (context, value, child) => HomePage()),
+        home: Consumer(builder: (context, value, child) => SearchPage()),
       ),
     );
   }

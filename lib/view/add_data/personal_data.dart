@@ -114,21 +114,15 @@ class _PersonalDataState extends State<PersonalData> {
       "data-roleinNG": providerone.dataRoleinNg,
       "data-houseownership": providerone.dataHouseownership,
       "data-landdetails-landarea": providerone.dataLanddetailsLandarea,
-      "data-landdetails-agricultureland":
-          providerone.dataLanddetailsAgricultureland,
-      "data-Animalhusbendary-businesstype":
-          providerone.dataAnimalhusbendaryBusinesstype,
+      "data-landdetails-agricultureland": providerone.dataLanddetailsAgricultureland,
+      "data-Animalhusbendary-businesstype": providerone.dataAnimalhusbendaryBusinesstype,
       "data-Animalhusbendary-others0": providerone.dataAnimalhusbendaryOthers0,
-      "data-Animalhusbendary-cdsregistration":
-          providerone.dataAnimalhusbendaryCdsregistration,
-      "data-Animalhusbendary-regdetails-regnumber":
-          providerone.dataAnimalhusbendaryRegdetailsRegnumber,
-      "data-Animalhusbendary-regdetails-cdsunitname":
-          providerone.dataAnimalhusbendaryRegdetailsCdsunitname,
+      "data-Animalhusbendary-cdsregistration": providerone.dataAnimalhusbendaryCdsregistration,
+      "data-Animalhusbendary-regdetails-regnumber": providerone.dataAnimalhusbendaryRegdetailsRegnumber,
+      "data-Animalhusbendary-regdetails-cdsunitname": providerone.dataAnimalhusbendaryRegdetailsCdsunitname,
       "data-enterpisetype": providerone.dataEnterpisetype,
       "data-noofgroupmembers": providerone.dataNoofgroupmembers,
-      "data-Yearofstartingagriculture":
-          providerone.dataYearofstartingagriculture,
+      "data-Yearofstartingagriculture": providerone.dataYearofstartingagriculture,
       "data-yearofstartingbussiness": providerone.dataYearofstartingbussiness,
       "data-amountinvested": providerone.dataAmountinvested,
       "data-Sourceofinvestment": providerone.dataSourceofinvestment,
@@ -146,16 +140,11 @@ class _PersonalDataState extends State<PersonalData> {
       "data-support": providerone.dataSupport,
       "data-others2": providerone.dataOthers2,
       "data-MGNREGAsupport": providerone.dataMgnregAsupport,
-      "data-landdetails1-landforgrass":
-          providerone.dataLanddetails1Landforgrass,
-      "data-landdetails1-qtyofownland":
-          providerone.dataLanddetails1Qtyofownland,
-      "data-landdetails1-qtyofleasedland":
-          providerone.dataLanddetails1Qtyofleasedland,
-      "data-landdetails2-siteforworkshed":
-          providerone.dataLanddetails2Siteforworkshed,
-      "data-landdetails2-qtyofownland":
-          providerone.dataLanddetails2Qtyofownland,
+      "data-landdetails1-landforgrass": providerone.dataLanddetails1Landforgrass,
+      "data-landdetails1-qtyofownland": providerone.dataLanddetails1Qtyofownland,
+      "data-landdetails1-qtyofleasedland": providerone.dataLanddetails1Qtyofleasedland,
+      "data-landdetails2-siteforworkshed": providerone.dataLanddetails2Siteforworkshed,
+      "data-landdetails2-qtyofownland": providerone.dataLanddetails2Qtyofownland,
       "data-others4": providerone.dataOthers4,
       "data-Trainingsrequired": providerone.dataTrainingsrequired,
       "data-others3": providerone.dataOthers3,
@@ -169,6 +158,39 @@ class _PersonalDataState extends State<PersonalData> {
         .set(data)
         .then((value) => print('Document added successfully $newDocumentRef'))
         .catchError((error) => print('Failed to add document: $error'));
+  }
+
+  @override
+  void dispose() {
+    // Dispose the text controllers
+    dataName.dispose();
+    dataAddress.dispose();
+    dataPhonenumber.dispose();
+    dataNameofNg.dispose();
+    dataNameofNGmember.dispose();
+    dataYearofstartingagriculture.dispose();
+    dataYearofstartingbussiness.dispose();
+    dataAmountinvested.dispose();
+    dataSupportrecived.dispose();
+    dataBusinessidea.dispose();
+    dataDistrict.dispose();
+    dataBlock.dispose();
+    dataPanchayth.dispose();
+    dataWard.dispose();
+    dataClass.dispose();
+    dataClass2.dispose();
+    dataClass3.dispose();
+    dataFamilyincome.dispose();
+    datalanddetailslandarea.dispose();
+    dataSupport.dispose();
+    datalanddetailsagricultureland.dispose();
+    dataInfraOthers.dispose();
+
+    // Dispose other resources
+    datePickerController.dispose();
+    selectedDateController.dispose();
+
+    super.dispose();
   }
 
 

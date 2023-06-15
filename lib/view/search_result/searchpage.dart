@@ -36,6 +36,9 @@ class _SearchIndividualPageState extends State<SearchPage> {
   void dispose() {
     _districtController.removeListener(searchIndividuals);
     _districtController.dispose();
+    _blockController.dispose();
+    _panchayathController.dispose();
+    _nameofcrpController.dispose();
     super.dispose();
   }
 
