@@ -150,8 +150,8 @@ class _PersonalDataState extends State<PersonalData> {
       "data-others3": providerone.dataOthers3,
       "data-comments": providerone.dataComments,
       "data-meta-instanceID": providerone.dataMetaInstanceId,
-      "PARENT_KEY" : DocumentId,
-      "KEY": DocumentId,
+      "PARENT_KEY" : 'uuid:${DocumentId}',
+      "KEY": 'uuid:${DocumentId}',
     };
     collectionRef
         .doc(DocumentId)
@@ -479,24 +479,13 @@ class _PersonalDataState extends State<PersonalData> {
               InputField(hint: 'ബിസ്സിനെസ്സ് ഐഡിയ', controller: dataBusinessidea, onchanged: (value){providerone.updateDataBusinessidea(value);}),
               SizedBox(height: 10,),
               Headings(text: 'അടിസ്ഥാന സൗകര്യം'),
-              // Container(
-              //   decoration: BoxDecoration(
-              //     borderRadius: BorderRadius.circular(10),
-              //     border: Border.all(color: Colors.black),
-              //   ),
-              //  child:
-               Column(
-                 children: [
-                   NoSearchDropdown(onChanged: (value){providerone.updateDataInfraShed(value);}, items:condition, hint: 'ഷെഡ് / കൂട്'),
-                   NoSearchDropdown(onChanged: (value){providerone.updateDataInfraWastage(value);}, items:condition, hint: 'വെസ്റ്റേജ്'),
-                   NoSearchDropdown(onChanged: (value){providerone.updateDataInfraBiogas(value);}, items:condition, hint: 'ബയോഗ്യാസ്'),
-                   NoSearchDropdown(onChanged: (value){providerone.updateDataInfraEquipments(value);}, items:condition, hint: 'ഉപകരണങ്ങൾ'),
-                   InputField(hint: 'മറ്റുള്ളവ ', controller: dataInfraOthers,onchanged: (value) {providerone.updateDataInfraOthers(value);},),
-                 ],
-               ),
-              // ),
-              InputField(hint: 'ആവശ്യമായ പിൻതുണ/സഹായം ', controller: dataSupport, onchanged: (value){}),
 
+               NoSearchDropdown(onChanged: (value){providerone.updateDataInfraShed(value);}, items:condition, hint: 'ഷെഡ് / കൂട്'),
+               NoSearchDropdown(onChanged: (value){providerone.updateDataInfraWastage(value);}, items:condition, hint: 'വെസ്റ്റേജ്'),
+               NoSearchDropdown(onChanged: (value){providerone.updateDataInfraBiogas(value);}, items:condition, hint: 'ബയോഗ്യാസ്'),
+               NoSearchDropdown(onChanged: (value){providerone.updateDataInfraEquipments(value);}, items:condition, hint: 'ഉപകരണങ്ങൾ'),
+               InputField(hint: 'മറ്റുള്ളവ ', controller: dataInfraOthers,onchanged: (value) {providerone.updateDataInfraOthers(value);},),
+              InputField(hint: 'ആവശ്യമായ പിൻതുണ/സഹായം ', controller: dataSupport, onchanged: (value){}),
               ElevateClick(ontap: (){
                 addDataOne();
                 Navigator.push(context, MaterialPageRoute(builder: (context) => FamilyData(parentid:DocumentId),));

@@ -25,7 +25,6 @@ class NoSearchDropdown extends StatelessWidget {
           child: DropdownSearch<String>(
             popupProps: PopupProps<String>.menu(
               showSelectedItems: true,
-              // showSearchBox: true,
               // disabledItemFn: (String s) => s.startsWith('I'),
             ),
             items: items,
