@@ -300,9 +300,7 @@ class _PersonalDataState extends State<PersonalData> {
                       value: providerone.isYesSelected,
                       onChanged:  (value) {
                         providerone.updateIsYesSelected(value!);
-                        if (value) {
                           providerone.updateDataAnimalhusbendaryCdsregistration('YES');
-                        }
                       },
                     ),
                     CheckboxListTile(
@@ -310,9 +308,7 @@ class _PersonalDataState extends State<PersonalData> {
                       value: !providerone.isYesSelected,
                       onChanged: (value) {
                         providerone.updateIsYesSelected(false);
-                        if(value == false){
-                          providerone.updateDataAnimalhusbendaryCdsregistration('NO');
-                        }
+                        providerone.updateDataAnimalhusbendaryCdsregistration('No');
                       },
                     ),
                     if (providerone.isYesSelected) ...[

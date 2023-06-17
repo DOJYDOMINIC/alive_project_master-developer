@@ -37,7 +37,7 @@ class MyApp extends StatelessWidget {
       ],
       child: MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: Consumer(builder: (context, value, child) => SearchPage()),
+        home: Consumer(builder: (context, value, child) => HomePage()),
       ),
     );
   }

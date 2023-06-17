@@ -62,7 +62,7 @@ class TextMain extends ChangeNotifier {
   String? _dataYearofstartingagriculture;
   String? _dataYearofstartingbussiness;
   String? _dataAmountinvested;
-  List? _dataSourceofinvestment;
+  String? _dataSourceofinvestment;
   String? _dataSupportrecived;
   String? _dataLoan;
   String? _dataTotalinvestment;
@@ -190,7 +190,7 @@ class TextMain extends ChangeNotifier {
 
   String? get dataAmountinvested => _dataAmountinvested;
 
-  List? get dataSourceofinvestment => _dataSourceofinvestment;
+  String? get dataSourceofinvestment => _dataSourceofinvestment;
 
   String? get dataSupportrecived => _dataSupportrecived;
 
@@ -547,8 +547,16 @@ class TextMain extends ChangeNotifier {
   }
 
   void updateDataSourceofinvestment(List<dynamic>? value) {
-    _dataSourceofinvestment = value;
+    _dataSourceofinvestment = "";
+    print('before: ${_dataSourceofinvestment}');
+    var values = "";
+    value?.forEach((element) {
+      values+='$element,';
+    });
+    _dataSourceofinvestment = values;
+    print('After : ${_dataSourceofinvestment}');
     notifyListeners();
+
   }
 
   void updateDataSupportrecived(String? value) {

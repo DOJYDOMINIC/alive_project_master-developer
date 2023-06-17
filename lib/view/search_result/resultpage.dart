@@ -104,7 +104,9 @@ class _IndividualPageState extends State<IndividualPage> {
     dataInfraWastage = TextEditingController(text: widget.details?['data-Infra-wastage']);
     dataInfraBiogas = TextEditingController(text: widget.details?['data-Infra-biogas']);
     dataInfraEquipments = TextEditingController(text: widget.details?['data-Infra-equipments']);
-    dataAnimalhusbendaryBusinesstype = TextEditingController(text: widget.details?['data-Animalhusbendary-businesstype']);
+    var value = TextEditingController(text: widget.details?['data-Animalhusbendary-businesstype']);
+    var values = value.toString().split(',');
+    dataAnimalhusbendaryBusinesstype = values?.toList();
 
 
 
@@ -121,8 +123,8 @@ class _IndividualPageState extends State<IndividualPage> {
     datalanddetailslandarea = TextEditingController(text: landArea.toString());
     datalanddetailsagricultureland = TextEditingController(text: agricultureLand.toString());
     dataAnimalhusbendaryRegdetailsRegnumber = TextEditingController(text:regdetailsRegnumber.toString() );
-
   }
+
 
   Future<void> updateDetails() async {
     var providerone = Provider.of<TextMain>(context,listen: false);
@@ -258,29 +260,29 @@ class _IndividualPageState extends State<IndividualPage> {
               InputField(hint: ' നിലം (സെന്റ്)', controller:datalanddetailsagricultureland , onchanged: (value){providerone.updateDataLanddetailsAgricultureland(value);},keytype: TextInputType.number,),
              SizedBox(height:10),
 
-              // Padding(
-              //   padding: const EdgeInsets.only(top: 10),
-              //   child: Container(
-              //     decoration: BoxDecoration(
-              //       borderRadius: BorderRadius.circular(10),
-              //       border: Border.all(color: Colors.black),
-              //     ),
-              //     child: MultiSelectFormField(
-              //       title: Text('മൃഗ സംരക്ഷണ മേഖലയിൽ ചെയ്യുന്ന ബിസിനസ്സ് ',style: TextStyle(fontWeight: FontWeight.bold),),
-              //       dataSource: businesstype,
-              //       textField: 'disply',
-              //       valueField: 'value',
-              //       okButtonLabel: 'OK',
-              //       cancelButtonLabel: 'CANCEL',
-              //       // hintText: 'Please select one or more options',
-              //       initialValue: dataAnimalhusbendaryBusinesstype,
-              //       onSaved: (value) {
-              //         if (value == null) return;
-              //         providerone.updateDataAnimalhusbendaryBusinesstype(value);
-              //       },
-              //     ),
-              //   ),
-              // ),
+              Padding(
+                padding: const EdgeInsets.only(top: 10),
+                child: Container(
+                  decoration: BoxDecoration(
+                    borderRadius: BorderRadius.circular(10),
+                    border: Border.all(color: Colors.black),
+                  ),
+                  child: MultiSelectFormField(
+                    title: Text('മൃഗ സംരക്ഷണ മേഖലയിൽ ചെയ്യുന്ന ബിസിനസ്സ് ',style: TextStyle(fontWeight: FontWeight.bold),),
+                    dataSource: businesstype,
+                    textField: 'disply',
+                    valueField: 'value',
+                    okButtonLabel: 'OK',
+                    cancelButtonLabel: 'CANCEL',
+                    // hintText: 'Please select one or more options',
+                    initialValue: dataAnimalhusbendaryBusinesstype,
+                    onSaved: (value) {
+                      if (value == null) return;
+                      providerone.updateDataAnimalhusbendaryBusinesstype(value);
+                    },
+                  ),
+                ),
+              ),
 
               Container(
                 decoration: BoxDecoration(
@@ -388,6 +390,7 @@ class _IndividualPageState extends State<IndividualPage> {
               InputField(hint: 'ഇതുവരെ സംരംഭത്തിൽ മുടക്കിയ  തുക', controller: dataAmountinvested, onchanged: (value){providerone.updateDataAmountinvested(value);},keytype: TextInputType.number,),
               // if (dataBusinessidea.text != '' )
                 InputField(hint: 'ലഭിച്ച പിന്തുണകൾ', controller: dataSupportrecived, onchanged: (value){providerone.updateDataSupportrecived(value);}),
+
               Container(
                 decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(10),
